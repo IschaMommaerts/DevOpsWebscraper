@@ -24,7 +24,7 @@ namespace WebScraper
             dv = new ChromeWebDriverRepository(path + @"/Drivers");
             vr = new VideoRepository();
             jr = new JobRepository();
-
+            dv.Start();
         }
 
         [Test]
@@ -289,45 +289,45 @@ namespace WebScraper
         [Test]
         public void testChromeRepositoryGetYoutube()
         {
-            dv.Start();
+            
             List<Video> videos = dv.getYoutube("Football");
             Assert.AreEqual(5, videos.Count);
-            dv.Quit();
+            
         }
 
         [Test]
         public void testChromeRepositoryGetJobs()
         {
-            dv.Start();
+            
             List<Job> jobs = dv.getJobs("loodgieter");
             Assert.Greater(jobs.Count, 1);
-            dv.Quit();
+            
         }
 
         [Test]
         public void testChromeRepositoryGetManga()
         {
-            dv.Start();
+            
             List<Manga> mangas = dv.getManga("action");
             Assert.Greater(mangas.Count, 1);
-            dv.Quit();
+            
         }
 
         [Test]
         public void testCHromeRepositoryGetChapters()
         {
-            dv.Start();
+            
             List<Manga> mangas = dv.getManga("Action");
             List<Chapter> chapters = dv.getChapters(mangas[0]);
 
             Assert.Greater(chapters.Count, 0);
-            dv.Quit();
+            
         }   
 
         [OneTimeTearDown]   
         public void TearDown()
         {
-            
+            dv.Quit();
         }
     }
 }
