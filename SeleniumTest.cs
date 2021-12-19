@@ -286,7 +286,7 @@ namespace WebScraper
             Assert.IsFalse(jobs.Contains(job));
         }
 
-        [Test]
+        /*[Test]
         public void testChromeRepositoryGetYoutube()
         {
             
@@ -294,7 +294,7 @@ namespace WebScraper
             Assert.AreEqual(5, videos.Count);
             
         }
-
+        */
         /*[Test]
         public void testChromeRepositoryGetJobs()
         {
@@ -303,7 +303,7 @@ namespace WebScraper
             Assert.Greater(jobs.Count, 1);
             
         }*/
-        /*
+        
         [Test]
         public void testChromeRepositoryGetManga()
         {
@@ -311,8 +311,8 @@ namespace WebScraper
             List<Manga> mangas = dv.getManga("action");
             Assert.Greater(mangas.Count, 1);
             
-        }*/
-        /*
+        }
+        
         [Test]
         public void testChromeRepositoryGetChapters()
         {
