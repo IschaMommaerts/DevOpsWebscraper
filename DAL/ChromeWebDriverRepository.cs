@@ -61,10 +61,10 @@ namespace WebScraper.DAL
                 _driver.Navigate().GoToUrl(video.Url);
                 var wait = new WebDriverWait(_driver, TimeSpan.FromMilliseconds(10000));
                 wait.Until(d => ((IJavaScriptExecutor)d).ExecuteScript("return document.readyState").Equals("complete"));
-                Thread.Sleep(1000);
+                Thread.Sleep(2000);
 
                 string videoTitle = _driver.FindElement(By.CssSelector("h1 > yt-formatted-string")).Text;
-                string videoUploader = _driver.FindElement(By.XPath("/html/body/ytd-app/div/ytd-page-manager/ytd-watch-flexy/div[5]/div[1]/div/div[7]/div[2]/ytd-video-secondary-info-renderer/div/div/ytd-video-owner-renderer/div[1]/ytd-channel-name/div/div/yt-formatted-string/a")).Text;
+                string videoUploader = _driver.FindElement(By.CssSelector("ytd-video-secondary-info-renderer yt-formatted-string.ytd-channel-name")).Text;
                 string viewCountString = _driver.FindElement(By.CssSelector("span.view-count")).Text.Split(' ')[0];
                 int viewCount = Int32.Parse(viewCountString.Replace(".", ""));    
 
@@ -87,21 +87,9 @@ namespace WebScraper.DAL
                 _driver.Navigate().GoToUrl(url);
                 var wait = new WebDriverWait(_driver, TimeSpan.FromMilliseconds(10000));
                 wait.Until(d => ((IJavaScriptExecutor)d).ExecuteScript("return document.readyState").Equals("complete"));
-                Thread.Sleep(1000);
+                Thread.Sleep(2000);
 
-                Int64 last_height = (Int64)(((IJavaScriptExecutor)_driver).ExecuteScript("return document.documentElement.scrollHeight"));
-                while (true)
-                {
-                    ((IJavaScriptExecutor)_driver).ExecuteScript("window.scrollTo(0, document.documentElement.scrollHeight);");
-                    /* Wait to load page */
-                    Thread.Sleep(2000);
-                    /* Calculate new scroll height and compare with last scroll height */
-                    Int64 new_height = (Int64)((IJavaScriptExecutor)_driver).ExecuteScript("return document.documentElement.scrollHeight");
-                    if (new_height == last_height)
-                        /* If heights are the same it will exit the function */
-                        break;
-                    last_height = new_height;
-                }
+                
 
                 By elem_job_link = By.CssSelector("a[class*=' job_']");
                 ReadOnlyCollection<IWebElement> driverJobs = _driver.FindElements(elem_job_link);
