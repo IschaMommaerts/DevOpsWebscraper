@@ -98,7 +98,10 @@ namespace WebScraper.DAL
                 foreach (var driverJob in driverJobs)
                 {
                     string datePosted = driverJob.FindElement(By.CssSelector(".date")).Text;
-                    if (datePosted == "Posted\r\n3 dagen geleden" || datePosted == "Posted\r\n3 days ago")
+                    
+                    int dateNumber = 0;
+                    Int32.TryParse(datePosted.Split('\n')[1].Substring(0, 1), out dateNumber);
+                    if (dateNumber > 2)
                     {
                         stop = true;
                         break;

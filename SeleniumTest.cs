@@ -300,7 +300,7 @@ namespace WebScraper
         {
             
             List<Job> jobs = dv.getJobs("plumber");
-            Assert.Greater(jobs.Count, 1);
+            Assert.Greater(jobs.Count, 0);
             
         } 
         
@@ -309,7 +309,7 @@ namespace WebScraper
         {
             
             List<Manga> mangas = dv.getManga("action");
-            Assert.Greater(mangas.Count, 1);
+            Assert.Greater(mangas.Count, 0);
             
         }
         
