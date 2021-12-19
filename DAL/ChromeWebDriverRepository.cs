@@ -84,7 +84,7 @@ namespace WebScraper.DAL
             List<Job> jobs = new List<Job>();
             do
             {
-                string url = string.Format("https://indeed.com/jobs?q={0}&sort=date&start={1}", searchTerm, page*10);
+                string url = string.Format("https://be.indeed.com/jobs?q={0}&sort=date&start={1}", searchTerm, page*10);
                 _driver.Navigate().GoToUrl(url);
                 var wait = new WebDriverWait(_driver, TimeSpan.FromMilliseconds(10000));
                 wait.Until(d => ((IJavaScriptExecutor)d).ExecuteScript("return document.readyState").Equals("complete"));
@@ -97,8 +97,8 @@ namespace WebScraper.DAL
                 if (driverJobs.Count() == 0) stop = true;
                 foreach (var driverJob in driverJobs)
                 {
-                    string temp = driverJob.FindElement(By.CssSelector(".date")).Text;
-                    if (driverJob.FindElement(By.CssSelector(".date")).Text == "Posted\r\n3 dagen geleden")
+                    string datePosted = driverJob.FindElement(By.CssSelector(".date")).Text;
+                    if (datePosted == "Posted\r\n3 dagen geleden" || datePosted == "Posted\r\n3 days ago")
                     {
                         stop = true;
                         break;
