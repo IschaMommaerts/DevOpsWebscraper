@@ -294,7 +294,7 @@ namespace WebScraper
             Assert.AreEqual(5, videos.Count);
             
         }
-        
+        /*
         [Test]
         public void testChromeRepositoryGetJobs()
         {
@@ -302,7 +302,7 @@ namespace WebScraper
             List<Job> jobs = dv.getJobs("plumber");
             Assert.Greater(jobs.Count, 1);
             
-        }
+        } */
         
         [Test]
         public void testChromeRepositoryGetManga()
