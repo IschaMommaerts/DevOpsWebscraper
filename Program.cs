@@ -16,8 +16,7 @@ namespace WebScraper
     {
         static void Main(string[] args)
         {
-            string path = Directory.GetParent(Environment.CurrentDirectory).Parent.Parent.FullName;
-            
+            string path = Directory.GetParent(Environment.CurrentDirectory).Parent.Parent.FullName;      
             ChromeWebDriverRepository dv = new ChromeWebDriverRepository(path + @"/drivers");
             VideoRepository videoRepository = new VideoRepository();
             JobRepository jobRepository = new JobRepository();
