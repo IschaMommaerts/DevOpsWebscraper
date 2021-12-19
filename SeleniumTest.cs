@@ -295,14 +295,14 @@ namespace WebScraper
             
         }
 
-        [Test]
+        /*[Test]
         public void testChromeRepositoryGetJobs()
         {
             
             List<Job> jobs = dv.getJobs("loodgieter");
             Assert.Greater(jobs.Count, 1);
             
-        }
+        }*/
         /*
         [Test]
         public void testChromeRepositoryGetManga()
