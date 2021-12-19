@@ -21,7 +21,7 @@ namespace WebScraper.DAL
         {
             this.path = path;
             this.chromeOptions = new ChromeOptions();
-            //_chromeOptions.AddArgument("--headless");
+            chromeOptions.AddArgument("--headless");
             this.chromeOptions.AddArgument("--log-level=3");
         }
 
