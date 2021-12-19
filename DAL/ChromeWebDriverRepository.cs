@@ -36,21 +36,20 @@ namespace WebScraper.DAL
             _driver.Navigate().GoToUrl(url);
             var wait = new WebDriverWait(_driver, TimeSpan.FromMilliseconds(10000));
             wait.Until(d => ((IJavaScriptExecutor)d).ExecuteScript("return document.readyState").Equals("complete"));
+            Thread.Sleep(1000);
             By elem_video_link = By.CssSelector("ytd-video-renderer.style-scope.ytd-item-section-renderer");
             ReadOnlyCollection<IWebElement> driverVideos = _driver.FindElements(elem_video_link);
 
             List<Video> videos = new List<Video>();
-            for (int i = 0; i < driverVideos.Count && i < 5; i++)
+
+            for (int i = 0; i < 5; i++)
             {
                 IWebElement driverVideo = driverVideos.ElementAt(i);
-                if (driverVideo.FindElements(By.XPath(".//*[@id='metadata-line']/span[2]")).Count() == 0)
-                {
-                    continue;                
-                }
+                //if (driverVideo.FindElements(By.XPath(".//*[@id='metadata-line']/span[2]")).Count() == 0) continue;
                 string videoUrl = driverVideo.FindElement(By.XPath(".//a[@id='thumbnail']")).GetAttribute("href");
                 Video video = new Video(keyword, videoUrl);
                 videos.Add(video);
-            }
+            }            
             videos = updateYoutube(videos);
             return videos;
         }
