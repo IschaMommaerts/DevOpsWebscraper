@@ -312,9 +312,9 @@ namespace WebScraper
             Assert.Greater(mangas.Count, 1);
             
         }
-
+        /*
         [Test]
-        public void testCHromeRepositoryGetChapters()
+        public void testChromeRepositoryGetChapters()
         {
             
             List<Manga> mangas = dv.getManga("Action");
@@ -322,7 +322,7 @@ namespace WebScraper
 
             Assert.Greater(chapters.Count, 0);
             
-        }   
+        }   */
 
         [OneTimeTearDown]   
         public void TearDown()
