@@ -1,4 +1,4 @@
-using NUnit.Framework;
+﻿using NUnit.Framework;
 using OpenQA.Selenium;
 using OpenQA.Selenium.Chrome;
 using OpenQA.Selenium.Firefox;
@@ -32,10 +32,10 @@ namespace WebScraper
         {
             Chapter chapter = new Chapter();
             string testUrl = "https://readmanganato.com/manga-tz953334/chapter-90";
-           
-            chapter.Url = testUrl;           
 
-            Assert.AreEqual(testUrl, chapter.Url);           
+            chapter.Url = testUrl;
+
+            Assert.AreEqual(testUrl, chapter.Url);
         }
 
         [Test]
@@ -63,7 +63,7 @@ namespace WebScraper
         [Test]
         public void testMangaUrlGetterSetter()
         {
-            Manga manga= new Manga();
+            Manga manga = new Manga();
             string testUrl = "https://readmanganato.com/manga-tz953334";
 
             manga.Url = testUrl;
@@ -108,7 +108,7 @@ namespace WebScraper
         public void testVideoKeywordGetterSetter()
         {
             string testKeyword = "football";
-            
+
             Video video = new Video();
             video.Keyword = testKeyword;
 
@@ -178,7 +178,7 @@ namespace WebScraper
         {
             string testTitle = "Tijdelijk dossierbeheerder te Berchem";
 
-            Job job = new Job();   
+            Job job = new Job();
             job.Title = testTitle;
 
             Assert.AreEqual(testTitle, job.Title);
@@ -289,42 +289,42 @@ namespace WebScraper
         [Test]
         public void testChromeRepositoryGetYoutube()
         {
-            
+
             List<Video> videos = dv.getYoutube("Football");
             Assert.AreEqual(5, videos.Count);
-            
+
         }
-        
+
         [Test]
         public void testChromeRepositoryGetJobs()
         {
-            
+
             List<Job> jobs = dv.getJobs("plumber");
             Assert.Greater(jobs.Count, 0);
-            
-        } 
-        
+
+        }
+
         [Test]
         public void testChromeRepositoryGetManga()
         {
-            
+
             List<Manga> mangas = dv.getManga("action");
             Assert.Greater(mangas.Count, 0);
-            
+
         }
-        
+
         [Test]
         public void testChromeRepositoryGetChapters()
         {
-            
+
             List<Manga> mangas = dv.getManga("Action");
             List<Chapter> chapters = dv.getChapters(mangas[0]);
 
             Assert.Greater(chapters.Count, 0);
-            
-        }  
 
-        [OneTimeTearDown]   
+        }
+
+        [OneTimeTearDown]
         public void TearDown()
         {
             dv.Quit();
