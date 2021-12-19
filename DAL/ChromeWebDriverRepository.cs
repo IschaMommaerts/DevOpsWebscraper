@@ -84,7 +84,7 @@ namespace WebScraper.DAL
             List<Job> jobs = new List<Job>();
             do
             {
-                string url = string.Format("https://be.indeed.com/jobs?q={0}&sort=date&start={1}", searchTerm, page*10);
+                string url = string.Format("https://indeed.com/jobs?q={0}&sort=date&start={1}", searchTerm, page*10);
                 _driver.Navigate().GoToUrl(url);
                 var wait = new WebDriverWait(_driver, TimeSpan.FromMilliseconds(10000));
                 wait.Until(d => ((IJavaScriptExecutor)d).ExecuteScript("return document.readyState").Equals("complete"));
