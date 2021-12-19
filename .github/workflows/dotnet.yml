@@ -29,3 +29,8 @@ jobs:
       run: dotnet test --no-build --verbosity normal
     - name: Publish
       run: dotnet publish
+    - name: Upload WebApp1 Build Artifact
+      uses: actions/upload-artifact@v2
+      with:
+        name: WebScraper
+        path: /home/runner/work/DevOpsWebscraper/DevOpsWebscraper/bin/Debug/net5.0/publish/
