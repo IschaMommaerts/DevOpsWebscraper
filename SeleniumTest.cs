@@ -21,7 +21,7 @@ namespace WebScraper
         public void setup()
         {
             string path = Directory.GetParent(Environment.CurrentDirectory).Parent.Parent.FullName;
-            dv = new ChromeWebDriverRepository(path);
+            dv = new ChromeWebDriverRepository(path + @"\drivers");
             vr = new VideoRepository();
             jr = new JobRepository();
 
@@ -286,14 +286,16 @@ namespace WebScraper
             Assert.IsFalse(jobs.Contains(job));
         }
 
+        [Test]
         public void testChromeRepositoryGetYoutube()
         {
             dv.Start();
             List<Video> videos = dv.getYoutube("Football");
-            Assert.Equals(5, videos.Count);
+            Assert.AreEqual(5, videos.Count);
             dv.Quit();
         }
 
+        [Test]
         public void testChromeRepositoryGetJobs()
         {
             dv.Start();
@@ -302,6 +304,7 @@ namespace WebScraper
             dv.Quit();
         }
 
+        [Test]
         public void testChromeRepositoryGetManga()
         {
             dv.Start();
@@ -310,6 +313,7 @@ namespace WebScraper
             dv.Quit();
         }
 
+        [Test]
         public void testCHromeRepositoryGetChapters()
         {
             dv.Start();
@@ -317,6 +321,7 @@ namespace WebScraper
             List<Chapter> chapters = dv.getChapters(mangas[0]);
 
             Assert.Greater(chapters.Count, 0);
+            dv.Quit();
         }   
 
         [OneTimeTearDown]   
