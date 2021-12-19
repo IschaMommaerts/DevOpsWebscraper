@@ -303,7 +303,7 @@ namespace WebScraper
             Assert.Greater(jobs.Count, 1);
             
         }
-
+        /*
         [Test]
         public void testChromeRepositoryGetManga()
         {
@@ -311,7 +311,7 @@ namespace WebScraper
             List<Manga> mangas = dv.getManga("action");
             Assert.Greater(mangas.Count, 1);
             
-        }
+        }*/
         /*
         [Test]
         public void testChromeRepositoryGetChapters()
