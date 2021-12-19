@@ -21,6 +21,8 @@ jobs:
       run: dotnet restore
     - name: Build
       run: dotnet build --no-restore
+    - name: Show current directory
+      run: pwd
     - name: Show contents of the current working directory
       run: ls -R
     - name: Test
