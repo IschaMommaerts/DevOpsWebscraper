@@ -110,7 +110,7 @@ namespace WebScraper.DAL
 
                     Job job = new Job(jobTitle, jobCompany, jobLocation, jobLink, searchTerm);
                     jobs.Add(job);
-                    Console.WriteLine(job.ToString());
+                    
                 }
                 page++;
 
