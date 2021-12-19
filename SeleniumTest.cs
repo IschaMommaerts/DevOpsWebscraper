@@ -21,7 +21,7 @@ namespace WebScraper
         public void setup()
         {
             string path = Directory.GetParent(Environment.CurrentDirectory).Parent.Parent.Parent.FullName;
-            dv = new ChromeWebDriverRepository("/home/runner/.dotnet" + @"/drivers");
+            dv = new ChromeWebDriverRepository("/home/runner/.dotnet" + @"/Drivers");
             vr = new VideoRepository();
             jr = new JobRepository();
 
