@@ -286,7 +286,7 @@ namespace WebScraper
             Assert.IsFalse(jobs.Contains(job));
         }
 
-        /*[Test]
+        [Test]
         public void testChromeRepositoryGetYoutube()
         {
             
@@ -294,7 +294,7 @@ namespace WebScraper
             Assert.AreEqual(5, videos.Count);
             
         }
-        */
+        
         /*[Test]
         public void testChromeRepositoryGetJobs()
         {

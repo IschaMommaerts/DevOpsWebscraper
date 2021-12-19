@@ -66,7 +66,8 @@ namespace WebScraper.DAL
                 string videoTitle = _driver.FindElement(By.CssSelector("h1 > yt-formatted-string")).Text;
                 string videoUploader = _driver.FindElement(By.CssSelector("ytd-video-secondary-info-renderer yt-formatted-string.ytd-channel-name")).Text;
                 string viewCountString = _driver.FindElement(By.CssSelector("span.view-count")).Text.Split(' ')[0];
-                int viewCount = Int32.Parse(viewCountString.Replace(".", ""));    
+                int viewCount = 0;
+                Int32.TryParse(viewCountString.Replace(".", ""), out viewCount);             
 
                 video.Title = videoTitle;
                 video.Uploader = videoUploader;
