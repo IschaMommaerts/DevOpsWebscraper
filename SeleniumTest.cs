@@ -20,7 +20,7 @@ namespace WebScraper
         [OneTimeSetUp]
         public void setup()
         {
-            string path = Directory.GetParent(Environment.CurrentDirectory).Parent.Parent.Parent.FullName;
+            string path = Directory.GetParent(Environment.CurrentDirectory).Parent.Parent.FullName;
             dv = new ChromeWebDriverRepository(path + @"\Drivers");
             vr = new VideoRepository();
             jr = new JobRepository();
