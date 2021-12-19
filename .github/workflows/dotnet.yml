@@ -27,3 +27,5 @@ jobs:
       run: chmod 777 /home/runner/work/DevOpsWebscraper/DevOpsWebscraper/Drivers/chromedriver
     - name: Test
       run: dotnet test --no-build --verbosity normal
+    - name: Publish
+      run: dotnet publish
