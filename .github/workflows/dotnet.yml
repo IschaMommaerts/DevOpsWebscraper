@@ -33,4 +33,4 @@ jobs:
       uses: actions/upload-artifact@v2
       with:
         name: WebScraper
-        path: /home/runner/work/DevOpsWebscraper/DevOpsWebscraper/bin/Debug/net5.0/publish/
+        path: /home/runner/work/DevOpsWebscraper/DevOpsWebscraper/bin/Release/net5.0/win-x64/publish/
