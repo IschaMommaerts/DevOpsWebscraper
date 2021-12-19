@@ -14,7 +14,7 @@ namespace WebScraper.Views
             WebscraperPage.Print("Youtube");
             PrintYoutubeVideos.printVideos(videos);
             Console.WriteLine(" ");
-            Console.Write("Enter the search term of the videos you want to remove");
+            Console.Write("Enter the search term of the videos you want to remove: ");
         }
     }
 }

@@ -11,7 +11,7 @@ namespace WebScraper.Views
         public static void Print()
         {
             WebscraperPage.Print("Indeed");
-            Console.WriteLine("Enter search term: ");
+            Console.Write("Enter search term: ");
         }
     }
 }

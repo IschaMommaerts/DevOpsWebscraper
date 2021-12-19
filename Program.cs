@@ -2,6 +2,8 @@
 using OpenQA.Selenium.Chrome;
 using System;
 using System.Collections.Generic;
+using System.Diagnostics;
+using Microsoft.Win32;
 using System.IO;
 using System.Linq;
 using System.Text;
@@ -77,6 +79,7 @@ namespace WebScraper
                         string searchTerm = Console.ReadLine();
                         List<Job> requestedJobs = dv.getJobs(searchTerm);
                         dv.Quit();
+                        ListIndeedJobs.Print(requestedJobs);
                         Console.Write("Add to database? (y/n): ");
                         choice = Console.ReadLine().Substring(0, 1).ToUpper();
                         if (choice == "Y")
@@ -84,7 +87,6 @@ namespace WebScraper
                             
                             foreach (Job job in requestedJobs)
                             {
-                                Console.WriteLine("test");
                                 jobs.Add(job);
                                 jobRepository.insertJob(job);
                             }
@@ -117,9 +119,9 @@ namespace WebScraper
                     Manga manga = mangas[Int32.Parse(Console.ReadLine())];
                     manga.Chapters = dv.getChapters(manga);
                     SelectChapterPage.Print(manga);
-                    Chapter chapter = manga.Chapters[Int32.Parse((Console.ReadLine()))];
-
-
+                    Chapter chapter = manga.Chapters[Int32.Parse(Console.ReadLine())];
+                    Console.WriteLine("Find this chapter at " + chapter.Url);
+                    Console.ReadLine();
                 }
 
             } while (true);

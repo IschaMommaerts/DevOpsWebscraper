@@ -11,7 +11,7 @@ namespace WebScraper.Views
         public static void print()
         {
             WebscraperPage.Print("Youtube");
-            Console.WriteLine("Enter search term: ");
+            Console.Write("Enter search term: ");
         }
     }
 }
