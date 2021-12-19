@@ -13,13 +13,18 @@ namespace WebScraper
 {
     public class Tests
     {
-        IWebDriver driver;
+        ChromeWebDriverRepository dv;
+        VideoRepository vr;
+        JobRepository jr;
 
         [OneTimeSetUp]
         public void setup()
         {
             string path = Directory.GetParent(Environment.CurrentDirectory).Parent.Parent.FullName;
-            ChromeWebDriverRepository dv = new ChromeWebDriverRepository(path);
+            dv = new ChromeWebDriverRepository(path);
+            vr = new VideoRepository();
+            jr = new JobRepository();
+
         }
 
         [Test]
@@ -94,7 +99,7 @@ namespace WebScraper
             string testUrl = "https://readmanganato.com/manga-tz953334";
             string testName = "Tensei Shitara Slime Datta Ken";
 
-            Manga manga = new Manga(testName, testUrl);
+            Manga manga = new Manga(testUrl, testName);
 
             Assert.IsTrue(testUrl.Equals(manga.Url) && testName.Equals(manga.Name));
         }
@@ -154,6 +159,8 @@ namespace WebScraper
             Assert.AreEqual(testViews, video.Views);
         }
 
+
+
         [Test]
         public void testVideoConstructor()
         {
@@ -165,6 +172,7 @@ namespace WebScraper
             Assert.IsTrue(testKeyword.Equals(video.Keyword) && testUrl.Equals(video.Url));
         }
 
+
         [Test]
         public void testJobTitleGetterSetter()
         {
@@ -173,7 +181,7 @@ namespace WebScraper
             Job job = new Job();   
             job.Title = testTitle;
 
-            Assert.Equals(testTitle, job.Title);
+            Assert.AreEqual(testTitle, job.Title);
         }
 
         [Test]
@@ -235,43 +243,86 @@ namespace WebScraper
 
         }
 
-
         [Test]
-        public void verifyLogo()
+        public void testVideoRepository()
         {
-            driver.Navigate().GoToUrl("https://www.browserstack.com/");
-            Assert.IsTrue(driver.FindElement(By.Id("logo")).Displayed);
+            string testKeyword = "football";
+            string testUrl = "https://www.youtube.com/watch?v=8uiR4SrDGZk";
+            string testTitle = "S.E.S. 'Dreams Come True' MV";
+            string testUploader = "SMTOWN";
+            int testViews = 6314446;
+
+            Video video = new Video(testKeyword, testUrl);
+            video.Title = testTitle;
+            video.Uploader = testUploader;
+            video.Views = testViews;
+
+            vr.InsertVideo(video);
+            List<Video> videos = (List<Video>)vr.GetVideos();
+            Assert.IsTrue(videos.Contains(video));
+
+            vr.DeleteVideos(testKeyword);
+            videos = (List<Video>)vr.GetVideos();
+            Assert.IsFalse(videos.Contains(video));
         }
 
         [Test]
-        public void verifyMenuItemCount()
+        public void testJobRepository()
         {
-            ReadOnlyCollection<IWebElement> menuItem = driver.FindElements(By.XPath("//ul[contains(@class,'horizontal-list product-menu')]/li"));
-            Assert.AreEqual(menuItem.Count, 4);
+            string testTitle = "Tijdelijk dossierbeheerder te Berchem";
+            string testCompany = "Unique";
+            string testLocation = "Berchem";
+            string testLink = "https://be.indeed.com/viewjob?jk=6c672575720d6cd1&tk=1fn9kb761tv2c800&from=serp&vjs=3&advn=6179801996916806&adid=311305802&ad=-6NYlbfkN0BvApDd_KPsNAkdcA3KAhvPzYcLUAJwI8yeayYaXu67fq2zsCwejOLje9-trLFrI45Ri3VDvZNin0sHI8peERsMQhmIUKDe0IOYCX10y3wOBZc12Y1TyeQRIofSFs6W8eHJxLXiEfhfKktJk0_oQArlGznINEdmcvaNnRbMDOdBA6Y1I42tLSez0UZnItJnjHc8I936jXexPSNjsqUN38v0k17bptP6JPjofymCyUVbXqAGnUFhAkaYu0pPJonhRsXu_e2F6LsDCSKEceMoKWpaMz2_tZUC8JNtauKtv61Q4hnW1ZNKHrO5_gsFhHri06bmKwzuyusoyy4Ij0XgpGpN4vjVl9tVUT4nOOHq6YYmxzSIVy3AJZ-x&sjdu=F-SCpDOeWcM1clM4e4Qi1qjyeZRaLkTRzFMfDyz9OE6WfqfsFII4PK_v_YAK8QsgOsDZzDXcYst-GckK1VxStsCfj5ldubh3Ej7vHonW0M0IZDV_LQe_qCK4YFNmbfExOk0GZG-DSLrszUxHQHWWKEiFBQzfMcHEnkQbf-npvi4";
+            string testSearchTerm = "IT";
+
+            Job job = new Job(testTitle, testCompany, testLocation, testLink, testSearchTerm);
+
+            jr.insertJob(job);
+            List<Job> jobs = (List<Job>)jr.GetJobs();
+            Assert.IsTrue(jobs.Contains(job));
+
+            jr.DeleteJobs(testSearchTerm);
+            jobs = (List<Job>)jr.GetJobs();
+            Assert.IsFalse(jobs.Contains(job));
         }
 
-        [Test]
-
-        public void verifyPricingPage()
-
+        public void testChromeRepositoryGetYoutube()
         {
-
-            driver.Navigate().GoToUrl("https://browserstack.com/pricing");
-            IWebElement contactUsPageHeader = driver.FindElement(By.TagName("h1"));
-            Assert.IsTrue(contactUsPageHeader.Text.Contains("Replace your device lab and VMs with any of these plans"));
-
+            dv.Start();
+            List<Video> videos = dv.getYoutube("Football");
+            Assert.Equals(5, videos.Count);
+            dv.Quit();
         }
 
-        [Test]
-        public void testYoutube()
+        public void testChromeRepositoryGetJobs()
         {
-            driver.Navigate().GoToUrl("https://youtube.com");
+            dv.Start();
+            List<Job> jobs = dv.getJobs("loodgieter");
+            Assert.Greater(jobs.Count, 1);
+            dv.Quit();
         }
+
+        public void testChromeRepositoryGetManga()
+        {
+            dv.Start();
+            List<Manga> mangas = dv.getManga("action");
+            Assert.Greater(mangas.Count, 1);
+            dv.Quit();
+        }
+
+        public void testCHromeRepositoryGetChapters()
+        {
+            dv.Start();
+            List<Manga> mangas = dv.getManga("Action");
+            List<Chapter> chapters = dv.getChapters(mangas[0]);
+
+            Assert.Greater(chapters.Count, 0);
+        }   
 
         [OneTimeTearDown]   
         public void TearDown()
         {
-            driver.Quit();
+            
         }
     }
 }
