@@ -94,7 +94,7 @@ namespace WebScraper.DAL
 
                 By elem_job_link = By.CssSelector("a[class*=' job_']");
                 ReadOnlyCollection<IWebElement> driverJobs = _driver.FindElements(elem_job_link);
-                
+                if (driverJobs.Count() == 0) stop = true;
                 foreach (var driverJob in driverJobs)
                 {
                     string temp = driverJob.FindElement(By.CssSelector(".date")).Text;

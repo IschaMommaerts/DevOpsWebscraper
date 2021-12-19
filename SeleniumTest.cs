@@ -299,7 +299,7 @@ namespace WebScraper
         public void testChromeRepositoryGetJobs()
         {
             
-            List<Job> jobs = dv.getJobs("loodgieter");
+            List<Job> jobs = dv.getJobs("plumber");
             Assert.Greater(jobs.Count, 1);
             
         }
